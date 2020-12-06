@@ -6,6 +6,8 @@ class Bracket:
     def __init__(self):
         self.num_players = 0
         self.player_list = list()
+        self.next_round = list()
+        self.rounds = 1
 
     def create_bracket(self):
         '''Asks the user what kind of match and how many players'''
@@ -26,7 +28,7 @@ class Bracket:
                     self.player_list.append(player)
                     self.num_players = num_players
                 break
-            else:
+            elif num == "3":
                 print("Enter a proper value")
         
     def create_order(self):
@@ -38,8 +40,8 @@ class Bracket:
             print(f"Player {x} is {player.name}")
 
     
-    def print_player(self):
-        for player in self.player_list:
+    def print_player(self, player_list):
+        for player in player_list:
             print(player.name)
 
     def team_match(self):
@@ -47,11 +49,31 @@ class Bracket:
 
     def one_on_one(self):
         """Puts a player agaisnt another player"""
+        x = 0
+        if self.rounds == 1:
+            player_list = self.player_list
+        else:
+            player_list = self.next_round
+            self.next_round.clear()
+        print(f"Starting round {self.rounds}")
+        while x < (len(player_list)):
+            player1 = player_list[x]
+            player2 = player_list[x+1]
+            player1.versus(player2)
+            x+=2
+            if player1.won == True:
+                self.next_round.append(player1)
+            else:
+                self.next_round.append(player2)
+            self.rounds +=1
+        print(f"Round {self.rounds-1} is over")
+        print("Players moving on:")
+        self.print_player(self.next_round)
+        
+        
 
-
-        player1 = self.player_list[0]
-        player2 = self.player_list[1]
-        player1.versus(player2)
+            
+        
 
     def create_player(self):
         """Prompt user for player info"""
@@ -68,6 +90,7 @@ if __name__ == "__main__":
     bracket = Bracket()
     bracket.create_bracket()
     bracket.create_order()
+    bracket.one_on_one()
 
 
 
