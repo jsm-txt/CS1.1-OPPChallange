@@ -1,22 +1,22 @@
 
 class Player:
-    """Creates a player class"""
-    def __init__(self, name, main):
+    '''Creates a player class'''
+    def __init__(self, name):
         self.name = name
-        self.main = main
+        self.main = str
         self.wins = 0
         self.losses = 0
 
 
     def player_intruduction(self):
-        """Player intruduction"""
+        '''Player intruduction'''
         print(f"My name is {self.name} and I play as {self.main}")
 
     def player_stats(self):
         print(f" {self.name} has {self.wins} wins and {self.losses} loss.")
 
     def versus(self, opponent):
-        """Figure out who wins"""
+        '''Figure out who wins'''
         while(True):
             winner = input("Who is the winner? ")
             if winner == self.name:
