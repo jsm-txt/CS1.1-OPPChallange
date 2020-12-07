@@ -150,6 +150,7 @@ class Bracket:
             i+=1
 
     def print_player(self, player_list):
+        '''prints player'''
             for player in player_list:
                 print(player.name)
                 
@@ -174,9 +175,10 @@ if __name__ == "__main__":
     run = True
     response = "Yes"
     while run == True:
+        response = input("Create a new bracket? (Yes/No): ")
         if response == "No" or response == "no":
             run = False
-        elif response == "Yes" or response == "no":
+        elif response == "Yes" or response == "yes":
             bracket = Bracket()
             bracket.create_bracket()
             bracket.num_players = 0
@@ -187,7 +189,7 @@ if __name__ == "__main__":
         else:
             print("Try Again")
 
-        response = input("Create a new bracket? (Yes/No): ")    
+            
 
 
 
