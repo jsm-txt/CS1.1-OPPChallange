@@ -1,6 +1,7 @@
 import random
 import math
 from team import Team
+from tsm import TSM
 from app import Player
 class Bracket:
     '''Creates a bracket class'''
@@ -151,12 +152,27 @@ class Bracket:
 
     def print_player(self, player_list):
         '''prints player'''
-            for player in player_list:
-                print(player.name)
+        for player in player_list:
+            print(player.name)
                 
     def create_team(self):
         '''Prompt user for team'''
+        
         team_name = input("Team's name: ")
+        tsmteam = True
+        while tsmteam == True:
+            response = input("Is this a tsm team? (y/n) ")
+            if response == "y":
+                team = TSM(90)
+                x=0
+                while x > 2:
+                    player = self.create_player()
+                    team.add_player(player)
+                    x+=1
+                return team
+            else:
+                tsmteam == False
+
         team = Team(team_name)
         x=0
         while x > 2:
