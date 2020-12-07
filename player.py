@@ -1,4 +1,3 @@
-
 class Player:
     '''Creates a player class'''
     def __init__(self, name):
@@ -9,8 +8,9 @@ class Player:
         self.won = False
 
 
-    def player_intruduction(self):
+    def intro(self):
         '''Player intruduction'''
+        self.main = input(f"{self.name} Who do you main? ")
         print(f"My name is {self.name} and I play as {self.main}")
 
     def player_stats(self):

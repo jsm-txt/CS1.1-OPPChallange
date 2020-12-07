@@ -1,3 +1,4 @@
+from player import Player
 class Team:
     def __init__(self, name):
         self.name = name
@@ -5,6 +6,11 @@ class Team:
         self.wins = 0
         self.losses = 0
         self.won = False
+
+    def intro(self):
+        '''Introduces team'''
+        for player in self.players:
+            player.intro()
     
     def add_player(self, player):
         '''Adds player to player list'''

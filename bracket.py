@@ -2,14 +2,14 @@ import random
 import math
 from team import Team
 from tsm import TSM
-from app import Player
+from player import Player
 class Bracket:
     '''Creates a bracket class'''
     def __init__(self):
         self.num_players = 0
         self.player_list = list()
         self.next_round = list()
-        self.rounds = 1
+        self._rounds = 1
         self.team_list = list()
 
     def create_bracket(self):
@@ -55,7 +55,7 @@ class Bracket:
                 self.one_on_one()
                 print("----------------------")
                 for players in self.player_list:
-                    players.stats()
+                    players.player_stats()
                 break
             elif num == "3":
                 print("Done")
@@ -69,6 +69,7 @@ class Bracket:
         for item in num_list:
             x+=1
             print(f"{item.name} is {x}")
+            item.intro()
 
     def team_match(self):
         '''Puts a team against another team'''
@@ -85,7 +86,7 @@ class Bracket:
                 self.next_round.append(team_list[len(team_list)-1])
             
             x = 0
-            print(f"Starting round {self.rounds}")
+            print(f"Starting round {self._rounds}")
 
             while x < (len(team_list)-1):
                 team1 = team_list[x]
@@ -97,8 +98,8 @@ class Bracket:
                 else:
                     self.next_round.append(team2)
             if i != length_round:
-                print(f"Round {self.rounds} is over")
-                self.rounds +=1
+                print(f"Round {self._rounds} is over")
+                self._rounds +=1
                 print("Teams moving on:")
                 for team in self.next_round:
                     print(team.name)
@@ -127,7 +128,7 @@ class Bracket:
                 self.next_round.append(player_list[len(player_list)-1])
             
             x = 0
-            print(f"Starting round {self.rounds}")
+            print(f"Starting round {self._rounds}")
 
             while x < (len(player_list)-1):
                 player1 = player_list[x]
@@ -139,8 +140,8 @@ class Bracket:
                 else:
                     self.next_round.append(player2)
             if i != length_round:
-                print(f"Round {self.rounds} is over")
-                self.rounds +=1
+                print(f"Round {self._rounds} is over")
+                self._rounds +=1
                 print("Players moving on:")
                 self.print_player(self.next_round)
                 
@@ -163,7 +164,7 @@ class Bracket:
         while tsmteam == True:
             response = input("Is this a tsm team? (y/n) ")
             if response == "y":
-                team = TSM(90)
+                team = TSM(team_name)
                 x=0
                 while x > 2:
                     player = self.create_player()
@@ -200,7 +201,7 @@ if __name__ == "__main__":
             bracket.num_players = 0
             bracket.player_list.clear
             bracket.next_round.clear
-            bracket.rounds = 1
+            bracket._rounds = 1
             bracket.team_list.clear
         else:
             print("Try Again")
