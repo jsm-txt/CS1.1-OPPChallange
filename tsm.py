@@ -8,3 +8,7 @@ class TSM(Team):
         print("This is Team part of TSM")
         for player in self.players:
             player.intro()
+    
+    def stats(self):
+        '''Print team statistics'''
+        print(f"TSM team {self.name} has {self.wins} wins and {self.losses} losses.")

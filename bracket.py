@@ -192,12 +192,13 @@ if __name__ == "__main__":
     run = True
     response = "Yes"
     while run == True:
-        response = input("Create a new bracket? (Yes/No): ")
+        response = input("Create a bracket? (Yes/No): ")
         if response == "No" or response == "no":
             run = False
         elif response == "Yes" or response == "yes":
             bracket = Bracket()
             bracket.create_bracket()
+            # Clears Bracket info after being run
             bracket.num_players = 0
             bracket.player_list.clear
             bracket.next_round.clear
@@ -205,11 +206,3 @@ if __name__ == "__main__":
             bracket.team_list.clear
         else:
             print("Try Again")
-
-            
-
-
-
-
-
-

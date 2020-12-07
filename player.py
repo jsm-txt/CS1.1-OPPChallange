@@ -15,7 +15,7 @@ class Player:
 
     def player_stats(self):
         '''Player stats'''
-        print(f" {self.name} has {self.wins} wins and {self.losses} loss.")
+        print(f" {self.name} who mains {self.name} has {self.wins} wins and {self.losses} losses.")
 
     def versus(self, opponent):
         '''Figure out who wins'''
@@ -35,5 +35,3 @@ class Player:
                 self.losses += 1
                 opponent.wins +=1
                 break
-
-    

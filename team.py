@@ -18,7 +18,7 @@ class Team:
     
     def stats(self):
         '''Print team statistics'''
-        print(f"{self.name} has {self.wins} wins and {self.losses} loss.")
+        print(f"{self.name} has {self.wins} wins and {self.losses} losses.")
     
 
     def versus(self, opponent):
