@@ -3,7 +3,7 @@ class Team:
         self.name = name
         self.players = list()
 
-    def view_all_heroes(self):
+    def view_all_players(self):
         '''Prints out all players.'''
         for player in self.players:
             print(player)

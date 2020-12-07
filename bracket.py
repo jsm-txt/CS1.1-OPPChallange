@@ -1,4 +1,5 @@
 import random
+import math
 from team import Team
 from app import Player
 class Bracket:
@@ -48,27 +49,45 @@ class Bracket:
         pass
 
     def one_on_one(self):
-        """Puts a player agaisnt another player"""
-        x = 0
-        if self.rounds == 1:
-            player_list = self.player_list
-        else:
-            player_list = self.next_round
-            self.next_round.clear()
-        print(f"Starting round {self.rounds}")
-        while x < (len(player_list)):
-            player1 = player_list[x]
-            player2 = player_list[x+1]
-            player1.versus(player2)
-            x+=2
-            if player1.won == True:
-                self.next_round.append(player1)
+        '''Puts a player agaisnt another player'''
+        
+        i = 1
+        length_round = math.ceil(len(self.player_list)/2)
+        player_list = self.player_list
+
+        while i <= length_round:
+            if i != 1:
+                player_list = self.next_round[:]
+                self.next_round.clear()
+
+            if len(player_list) % 2 != 0:
+                self.next_round.append(player_list[len(player_list)-1])
+            
+            x = 0
+            print(f"Starting round {self.rounds}")
+
+            while x < (len(player_list)-1):
+                player1 = player_list[x]
+                player2 = player_list[x+1]
+                player1.versus(player2)
+                x+=2
+                if player1.won == True:
+                    self.next_round.append(player1)
+                else:
+                    self.next_round.append(player2)
+            if i != length_round:
+                print(f"Round {self.rounds} is over")
+                self.rounds +=1
+                print("Players moving on:")
+                self.print_player(self.next_round)
+                
             else:
-                self.next_round.append(player2)
-            self.rounds +=1
-        print(f"Round {self.rounds-1} is over")
-        print("Players moving on:")
-        self.print_player(self.next_round)
+                self.print_player(self.next_round)
+                print(f"Final round is over")
+                print(f" {self.print_player(self.next_round)} is the winner!!!")
+            i+=1
+
+
         
         
 
