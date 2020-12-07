@@ -10,6 +10,7 @@ class Bracket:
         self.next_round = list()
         self.rounds = 1
         self.team_list = list()
+
     def create_bracket(self):
         '''Asks the user what kind of match and how many players'''
         num_players = 0
@@ -23,9 +24,18 @@ class Bracket:
                     if num_of_teams < 2:
                         print("Enter a number higher than 2")
                 self.num_of_teams = num_of_teams
+
                 for i in range(num_of_teams):
                     team = self.create_team()
+                    z=0
+                    while z < 2:
+                        player = self.create_player()
+                        team.add_player(player)
+                        z+=1
                     self.team_list.append(team)
+
+                
+                
                     
                 self.create_order(self.team_list)
                 self.team_match()
@@ -44,8 +54,9 @@ class Bracket:
                 self.one_on_one()
                 break
             elif num == "3":
+                print("Done")
+            else:
                 print("Enter a proper value")
-
 
     def create_order(self,num_list):
         '''Creates bracket order from random'''
@@ -90,11 +101,12 @@ class Bracket:
             else:
                 print(f"Final round is over")
                 team = self.next_round[0]
-                print(team.name)
-                print("is the winner!!!")
+                player1 = team.players[0]
+                player2 = team.players[1]
+                print(f"Team {team.name} is the winner!!!")
+                print(f"Players {player1.name} and {player2.name} have won!")
             i+=1
         
-
     def one_on_one(self):
         '''Puts a player agaisnt another player'''
         
@@ -137,8 +149,7 @@ class Bracket:
     def print_player(self, player_list):
             for player in player_list:
                 print(player.name)
-
-
+                
     def create_team(self):
         '''Prompt user for team'''
         team_name = input("Team's name: ")
@@ -150,7 +161,6 @@ class Bracket:
             x+=1
         return team
 
-
     def create_player(self):
         '''Prompt user for player'''
         player_name = input("Player's name: ")
@@ -158,11 +168,6 @@ class Bracket:
         return player
 
 if __name__ == "__main__":
-    # player = Player("pol", "jol")
-    # player2 = Player("polu" , "steel")
-
-    # player.versus(player2)
-
     bracket = Bracket()
     bracket.create_bracket()
 

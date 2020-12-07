@@ -14,6 +14,7 @@ class Player:
         print(f"My name is {self.name} and I play as {self.main}")
 
     def player_stats(self):
+        '''Player stats'''
         print(f" {self.name} has {self.wins} wins and {self.losses} loss.")
 
     def versus(self, opponent):
