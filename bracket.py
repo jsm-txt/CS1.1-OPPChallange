@@ -171,7 +171,7 @@ class Bracket:
                     x+=1
                 return team
             else:
-                tsmteam == False
+                tsmteam = False
 
         team = Team(team_name)
         x=0
