@@ -34,11 +34,11 @@ class Bracket:
                         z+=1
                     self.team_list.append(team)
 
-                
-                
-                    
                 self.create_order(self.team_list)
                 self.team_match()
+                print("----------------------")
+                for teams in self.team_list:
+                    teams.stats()
                 break 
                
             elif num == "2":
@@ -52,6 +52,9 @@ class Bracket:
                     self.player_list.append(player)
                 self.create_order(self.player_list)
                 self.one_on_one()
+                print("----------------------")
+                for players in self.player_list:
+                    players.stats()
                 break
             elif num == "3":
                 print("Done")
@@ -168,8 +171,24 @@ class Bracket:
         return player
 
 if __name__ == "__main__":
-    bracket = Bracket()
-    bracket.create_bracket()
+    run = True
+    response = "Yes"
+    while run == True:
+        if response == "No" or response == "no":
+            run = False
+        elif response == "Yes" or response == "no":
+            bracket = Bracket()
+            bracket.create_bracket()
+            bracket.num_players = 0
+            bracket.player_list.clear
+            bracket.next_round.clear
+            bracket.rounds = 1
+            bracket.team_list.clear
+        else:
+            print("Try Again")
+
+        response = input("Create a new bracket? (Yes/No): ")    
+
 
 
 

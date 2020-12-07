@@ -12,16 +12,14 @@ class Team:
     
     def stats(self):
         '''Print team statistics'''
-        for player in self.players:
-            kd = player.kills / player.deaths
-            print("{} Kill/Deaths:{}".format(player.name,kd))
+        print(f"{self.name} has {self.wins} wins and {self.losses} loss.")
     
 
     def versus(self, opponent):
         '''Figure out who wins'''
         print(f"{self.name} versus {opponent.name}")
         while(True):
-            
+            self.won = False
             winner = input("Who is the winner? ")
             if winner == self.name:
                 print(f"{self.name} won the match and advances")
