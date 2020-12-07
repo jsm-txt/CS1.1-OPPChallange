@@ -9,44 +9,91 @@ class Bracket:
         self.player_list = list()
         self.next_round = list()
         self.rounds = 1
-
+        self.team_list = list()
     def create_bracket(self):
         '''Asks the user what kind of match and how many players'''
         num_players = 0
+        num_of_teams = 0
         num = None
         while num != "3":
             num = input("[1] Is two versus two? \n[2] One on one match? \n[3] Done? \n ")
             if num == "1":
-                pass
+                while num_of_teams < 2:
+                    num_of_teams = int(input("How many teams in the tournament? "))
+                    if num_of_teams < 2:
+                        print("Enter a number higher than 2")
+                self.num_of_teams = num_of_teams
+                for i in range(num_of_teams):
+                    team = self.create_team()
+                    self.team_list.append(team)
+                    
+                self.create_order(self.team_list)
+                self.team_match()
+                break 
                
             elif num == "2":
                 while num_players < 2:
                     num_players = int(input("How many players in the tournament? "))
                     if num_players < 2:
                         print("Enter a number higher than 2")
+                self.num_players = num_players
                 for i in range(num_players):
                     player = self.create_player()
                     self.player_list.append(player)
-                    self.num_players = num_players
+                self.create_order(self.player_list)
+                self.one_on_one()
                 break
             elif num == "3":
                 print("Enter a proper value")
-        
-    def create_order(self):
+
+
+    def create_order(self,num_list):
         '''Creates bracket order from random'''
         x=0
-        random.shuffle(self.player_list)
-        for player in self.player_list:
+        random.shuffle(num_list)
+        for item in num_list:
             x+=1
-            print(f"Player {x} is {player.name}")
-
-    
-    def print_player(self, player_list):
-        for player in player_list:
-            print(player.name)
+            print(f"{item.name} is {x}")
 
     def team_match(self):
-        pass
+        '''Puts a team against another team'''
+        i = 1
+        length_round = math.ceil(len(self.team_list)/2)
+        team_list = self.team_list
+
+        while i <= length_round:
+            if i != 1:
+                team_list = self.next_round[:]
+                self.next_round.clear()
+
+            if len(team_list) % 2 != 0:
+                self.next_round.append(team_list[len(team_list)-1])
+            
+            x = 0
+            print(f"Starting round {self.rounds}")
+
+            while x < (len(team_list)-1):
+                team1 = team_list[x]
+                team2 = team_list[x+1]
+                team1.versus(team2)
+                x+=2
+                if team1.won == True:
+                    self.next_round.append(team1)
+                else:
+                    self.next_round.append(team2)
+            if i != length_round:
+                print(f"Round {self.rounds} is over")
+                self.rounds +=1
+                print("Teams moving on:")
+                for team in self.next_round:
+                    print(team.name)
+            else:
+                print(f"Final round is over")
+                team = self.next_round[0]
+                print(team.name)
+                print("is the winner!!!")
+            i+=1
+        
 
     def one_on_one(self):
         '''Puts a player agaisnt another player'''
@@ -82,20 +129,30 @@ class Bracket:
                 self.print_player(self.next_round)
                 
             else:
-                self.print_player(self.next_round)
                 print(f"Final round is over")
-                print(f" {self.print_player(self.next_round)} is the winner!!!")
+                self.print_player(self.next_round)
+                print(" is the winner!!!")
             i+=1
 
+    def print_player(self, player_list):
+            for player in player_list:
+                print(player.name)
 
-        
-        
 
-            
-        
+    def create_team(self):
+        '''Prompt user for team'''
+        team_name = input("Team's name: ")
+        team = Team(team_name)
+        x=0
+        while x > 2:
+            player = self.create_player()
+            team.add_player(player)
+            x+=1
+        return team
+
 
     def create_player(self):
-        """Prompt user for player info"""
+        '''Prompt user for player'''
         player_name = input("Player's name: ")
         player = Player(player_name)
         return player
@@ -108,8 +165,7 @@ if __name__ == "__main__":
 
     bracket = Bracket()
     bracket.create_bracket()
-    bracket.create_order()
-    bracket.one_on_one()
+
 
 
 
